@@ -8,11 +8,15 @@ public class TestMain {
 
 
     public static void main(String[] args) {
-        int[] nums = new int[]{3, 4, 6, 15};
-        int target = 6;
-        int[] result = twoSum(nums, target);
-        int[] result12 = twoSumSimpleVersion(nums,target);
-        System.out.println("done");
+//        int[] nums = new int[]{3, 4, 6, 15};
+//        int target = 6;
+//        int[] result = twoSum(nums, target);
+//        int[] result12 = twoSumSimpleVersion(nums,target);
+//        System.out.println("done");
+//        String test = "123";
+//        System.out.println(test.le);
+
+        System.out.println(countSubstrings1("aba"));
     }
 
 
@@ -40,4 +44,53 @@ public class TestMain {
         }
         return result;
     }
+
+    public static int countSubstrings(String s) {
+        if(s == ""){
+            return 0;
+        }
+        if(s.length() == 1){
+            return 1;
+        }
+        int totalCount = 0;
+        int singleCharCount = 1;
+        for(int i=0;i<s.length()-1;i++){
+            if(s.charAt(i) == s.charAt(i+1)){
+                singleCharCount++;
+            }else{
+                totalCount+=singleCharCount==1?1:singleCharCount*(singleCharCount-1);
+                singleCharCount=1;
+            }
+        }
+        return totalCount;
+    }
+
+
+    public static int countSubstrings1(String s) {
+        int n = s.length(), ans = 0;
+        for (int i = 0; i < 2 * n - 1; ++i) {
+            int l = i / 2, r = i / 2 + i % 2;
+            while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
+                --l;
+                ++r;
+                ++ans;
+            }
+        }
+        return ans;
+    }
+
+
+    public static int test(String s){
+        int n = s.length(), ans = 0;
+        for (int i=0;i<2*n-1;i++){
+            int l = i/2,r=i/2+i%2;
+            if(l>=0&&r<n&&s.charAt(l) == s.charAt(r)){
+                --l;
+                ++r;
+                ++ans;
+            }
+        }
+        return ans;
+    }
+
 }
